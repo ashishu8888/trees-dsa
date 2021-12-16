@@ -5,13 +5,7 @@ int num;
     int data;
    struct node *left;
     struct node *right;
-}*newnode;
-int max(int x,int y){
-    if(x>=y)
-    return x;
-    
-    return y;
-}
+};
 struct node* createTree(){
     struct node* root = (struct node*)malloc(sizeof(struct node));
     root->left = NULL;
@@ -34,16 +28,27 @@ struct node* createTree(){
 
 
 }
-int height_binTree(struct node* root){
+
+void printKDist(struct node* root , int k){
+
     if(root == NULL)
-    return 0;
+    return;
+
+    if(k == 0)
+    printf("%d ",root->data);
 
     else{
-        return (1+max(height_binTree(root->left) , height_binTree(root->right)));
+        printKDist(root->left , k-1);
+        printKDist(root->right , k-1);
     }
+
+
 }
 int main(){
+    int k;
    struct node* root = createTree();
-    printf("%d",height_binTree(root));
+   printf("Enter the distance at which you want to print nodes\n");
+   scanf("%d",&k);
+    printKDist(root,k);
 
 }
