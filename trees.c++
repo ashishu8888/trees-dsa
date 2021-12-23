@@ -27,17 +27,25 @@ int num;
     cout<<"enter data to the right of "<<root->data<<"\n";
     root->right = createTree();
 }
-void level_order_by_queue( node* root){
-    printf("displaying level order traversal of binary tree\n");
+void level_order_line_by_line_by_queue( node* root){
+    printf("displaying level order line by line  traversal of binary tree\n");
 
     queue<node*> q;
 
     q.push(root);
-
-    while(q.empty() == false)
+    q.push(NULL);
+    while(q.size()>1)
     {
-        node* curr = q.front();
+
+       node* curr = q.front();
         q.pop();
+        if(curr == NULL)
+        {
+            cout<<"\n";
+            q.push(NULL);
+            continue;
+        }
+
         cout<<curr->data<<" ";
 
         if(curr->left != NULL)
@@ -52,6 +60,6 @@ void level_order_by_queue( node* root){
 }
 int main(){
     node* root = createTree();
-   level_order_by_queue(root);
+   level_order_line_by_line_by_queue(root);
 
 }
