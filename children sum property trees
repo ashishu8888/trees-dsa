@@ -1,0 +1,57 @@
+
+#include<bits/stdc++.h>
+#include<queue>
+using namespace std;
+int num , multilevel = 0;
+ struct node{
+    int data;
+   struct node *left;
+    struct node *right;
+}*newnode;
+ node* createTree(){
+     node* root = new node;
+    root->left = NULL;
+    root->right = NULL;
+   cout<<"enter data\n";
+   cin>>num;
+
+
+    if(num == -1)
+    return NULL;
+
+    root->data = num;
+
+    cout<<"enter data to the left of "<<root->data<<"\n";
+    root->left = createTree();
+
+    cout<<"enter data to the right of "<<root->data<<"\n";
+    root->right = createTree();
+}
+bool childrenSUMproperty(node* root){
+
+    if(root == NULL)
+    return true;
+
+    if(root->left == NULL && root->right == NULL)
+    return true;
+
+    int sum = 0;
+
+    if(root->left !=  NULL)
+    sum += (root->left->data);
+
+    if(root->right != NULL)
+    sum += (root->right->data);
+
+    return (root->data == sum && childrenSUMproperty(root->left) && childrenSUMproperty(root->right));
+
+}
+int main(){
+    node* root = createTree();
+    bool check = childrenSUMproperty(root);
+
+    if(check)
+    cout<<"Yes";
+    else cout<<"No";
+
+}
